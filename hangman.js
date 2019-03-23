@@ -10,6 +10,8 @@ const Hangman = function (word = [],remainingGuesses) {
 
 
 Hangman.prototype.makeGuess = function (guess) {
+    if(!this.status === 'playing') return;
+
     guess = guess.toLowerCase();
     if(this.word.includes(guess) && !this.guessedLetters.includes(guess)) {
         this.guessedLetters.push(guess);
@@ -17,6 +19,7 @@ Hangman.prototype.makeGuess = function (guess) {
     else{
         this.remainingGuesses--;
     }
+    
     this.calculateStatus();
 }
 
@@ -27,6 +30,12 @@ Hangman.prototype.getPuzzle = function () {
        text += ' ';
    });
    return text;
+}
+
+Hangman.prototype.getStatus = function () {
+    if(this.status === 'playing') return `Jugando -> Intentos restantes: ${this.remainingGuesses}`;
+    else if(this.status === 'failed') return `Buen intento! la palabra era "${this.word.join('')}"`;
+    else if(this.status === 'finished') return 'Buen trabajo! haz acertado a la palabra';
 }
 
 
