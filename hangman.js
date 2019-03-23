@@ -17,6 +17,7 @@ Hangman.prototype.makeGuess = function (guess) {
     else{
         this.remainingGuesses--;
     }
+    this.calculateStatus();
 }
 
 Hangman.prototype.getPuzzle = function () {
@@ -27,9 +28,13 @@ Hangman.prototype.getPuzzle = function () {
    });
    return text;
 }
+
+
 Hangman.prototype.calculateStatus = function () {
+    const finished = this.word.every((letter) => this.guessedLetters.includes(letter));
+    
     if(this.remainingGuesses <= 0) this.status = 'failed';
-    else if(this.guessedLetters.length === this.word.length) this.status = 'finished';
+    else if(finished) this.status = 'finished';
     else this.status = 'playing';
 }
 

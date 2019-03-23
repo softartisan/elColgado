@@ -11,7 +11,5 @@ window.addEventListener('keypress', (e) =>{
     game.makeGuess(guess);
     h1Puzzle.textContent = game.getPuzzle();
     spanGuesses.textContent = game.remainingGuesses;
-
-    game.calculateStatus();
     console.log(game.status);
 });
